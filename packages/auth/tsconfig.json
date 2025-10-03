@@ -1,0 +1,4 @@
+{
+    "extends": "@saas-rbac/ts-config/library.json",
+    "include": ["src/**/*", "eslint.config.ts"],
+}

@@ -1,0 +1,16 @@
+{
+    "name": "@saas-rbac/api",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "node --no-warnings --experimental-transform-types --watch src/index.ts"
+    },
+    "dependencies": {
+        "@saas-rbac/auth": "workspace:*"
+    },
+    "devDependencies": {
+        "@saas-rbac/eslint-config": "workspace:*",
+        "@saas-rbac/ts-config": "workspace:*",
+        "@types/node": "^24.6.2"
+    }
+}
