@@ -13,7 +13,7 @@ import { organizationSubject } from './subjects/organizations.ts'
 import { inviteSubject } from './subjects/invite.ts'
 import { billingSubject } from './subjects/billing.ts'
 
-const appAbilitiesSchema = z.union([
+export const appAbilitiesSchema = z.union([
   projectSubject,
   userSubject,
   organizationSubject,
@@ -22,6 +22,10 @@ const appAbilitiesSchema = z.union([
 
   z.tuple([z.literal('manage'), z.literal('all')]),
 ])
+
+export * from './models/user.ts'
+export * from './models/organization.ts'
+export * from './models/project.ts'
 
 type AppAbilities = z.infer<typeof appAbilitiesSchema>
 
@@ -37,7 +41,11 @@ export function defineAbilityFor(user: User) {
 
   permissions[user.role](user, builder)
 
-  const ability = builder.build()
+  const ability = builder.build({
+    detectSubjectType(subject) {
+      return subject.__typename
+    },
+  })
 
   return ability
 }

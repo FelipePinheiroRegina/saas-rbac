@@ -1,0 +1,9 @@
+services:
+  pg:
+    image: bitnami/postgresql:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES-USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=saas-rbac

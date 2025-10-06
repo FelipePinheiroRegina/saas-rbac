@@ -1,4 +1,4 @@
 {
     "extends": "@saas-rbac/ts-config/node.json",
-    "include": ["src/**/*", "eslint.config.ts"],
+    "include": ["src/**/*", "eslint.config.ts", "prisma/seed.ts"],
 }
