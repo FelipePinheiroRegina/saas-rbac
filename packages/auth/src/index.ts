@@ -26,6 +26,7 @@ export const appAbilitiesSchema = z.union([
 export * from './models/user.ts'
 export * from './models/organization.ts'
 export * from './models/project.ts'
+export * from './roles.ts'
 
 type AppAbilities = z.infer<typeof appAbilitiesSchema>
 
@@ -46,6 +47,9 @@ export function defineAbilityFor(user: User) {
       return subject.__typename
     },
   })
+
+  ability.can = ability.can.bind(ability)
+  ability.cannot = ability.cannot.bind(ability)
 
   return ability
 }

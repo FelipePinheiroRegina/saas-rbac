@@ -1,0 +1,16 @@
+{
+  "name": "@saas-rbac/env",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "devDependencies": {
+    "@saas-rbac/eslint-config": "workspace:*",
+    "@saas-rbac/ts-config": "workspace:*",
+    "@types/node": "^24.6.2"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "zod": "^4.1.11"
+  }
+}
