@@ -3,16 +3,22 @@
     "version": "1.0.0",
     "type": "module",
     "scripts": {
-        "dev": "node --no-warnings --experimental-transform-types --watch src/http/server.ts"
+        "dev": "pnpm env:load node --no-warnings --experimental-transform-types --watch src/http/server.ts",
+        "db:migrate": "pnpm env:load prisma migrate dev",
+        "db:studio": "pnpm env:load prisma studio",
+        "env:load": "dotenv -e ../../.env --"
     },
     "dependencies": {
         "@fastify/cors": "^11.1.0",
+        "@fastify/jwt": "^10.0.0",
         "@fastify/swagger": "^9.5.2",
         "@fastify/swagger-ui": "^5.2.3",
         "@prisma/client": "6.16.3",
         "@saas-rbac/auth": "workspace:*",
+        "@saas-rbac/env": "workspace:*",
         "bcryptjs": "^3.0.2",
         "fastify": "^5.6.1",
+        "fastify-plugin": "^5.1.0",
         "fastify-type-provider-zod": "^6.0.0",
         "zod": "^4.1.11"
     },
@@ -21,6 +27,7 @@
         "@saas-rbac/eslint-config": "workspace:*",
         "@saas-rbac/ts-config": "workspace:*",
         "@types/node": "^24.6.2",
+        "dotenv-cli": "^10.0.0",
         "prisma": "^6.16.3"
     },
     "prisma": {

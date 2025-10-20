@@ -1,0 +1,175 @@
+@baseUrl = http://localhost:3333
+@accessToken = Bearer {{login.response.body.access_token}}
+@access_token_github = Bearer {{login_github.response.body.access_token}}
+
+# @name create_account
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "Felipe Pinheiro",
+    "email": "pinheiro@acme.com",
+    "password": "123456"
+}
+
+###
+
+# @name login
+POST {{baseUrl}}/sessions/password
+Content-Type: application/json
+
+{
+    "email": "pinheiro@acme.com",
+    "password": "123456"
+}
+
+###
+
+# @name login_github
+POST {{baseUrl}}/sessions/github
+Content-Type: application/json
+
+{
+    "code": "20d127f170913de54452"
+}
+
+###
+
+# @name getProfile
+GET {{baseUrl}}/profile
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+###
+
+# @name password_recover
+POST {{baseUrl}}/password/recover
+Content-Type: application/json
+
+{
+    "email": "pinheiro@acme.com"
+}
+
+
+###
+
+# @name password_reset
+POST {{baseUrl}}/password/reset
+Content-Type: application/json
+
+{
+    "code": "c17c1cf3-e6f7-49ce-966b-0812a59f67d6",
+    "password": "123456"
+}
+
+###
+
+# @name create_organization
+POST {{baseUrl}}/organization/create
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "name": "Pinheiro's dev organization",
+    "domain": "pinheiro.team",
+    "shouldAttachUsersByDomain": true
+}
+
+###
+
+# @name get_membership
+GET {{baseUrl}}/organization/pinheiros-dev-organization/membership
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+
+###
+
+# @name get_organization_details
+GET {{baseUrl}}/organization/pinheiros-dev-organization/details
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+
+###
+
+# @name get_organizations_where_user_member
+GET {{baseUrl}}/organization/organizations_where_user_member
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+###
+
+# @name update_organization
+PUT {{baseUrl}}/organization/acme-admin
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "name": "Regina Dev's"
+}
+
+###
+
+# @name delete_organization
+DELETE  {{baseUrl}}/organization/pinheiros-dev-organization
+Authorization: {{accessToken}}
+
+###
+
+# @name update_organization_owner
+PATCH  {{baseUrl}}/organization/pinheiros-dev-organization/owner
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "newOwnerId": "e8f46233-cbeb-465f-81a4-6052ea08cf9a"
+}
+
+###
+
+# @name create_project
+POST {{baseUrl}}/organization/pinheiros-dev-organization/projects
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "name": "new project",
+    "description": "New projects description"
+}
+
+###
+
+# @name get_project
+GET {{baseUrl}}/organization/pinheiros-dev-organization/projects/new-project
+Authorization: {{accessToken}}
+
+
+###
+
+# @name get_projects
+GET {{baseUrl}}/organization/acme-member/projects
+Authorization: {{accessToken}}
+
+###
+
+# @name get_members
+GET {{baseUrl}}/organization/pinheiros-dev-organization/members
+Authorization: {{accessToken}}
+
+###
+
+# @name update_member
+PUT {{baseUrl}}/organization/pinheiros-dev-organization/members/ca064a9d-38b8-4f23-883d-ff5cdddd14a6
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "role": "MEMBER"
+}
+
+###
+
+# @name remove_member
+DELETE  {{baseUrl}}/organization/pinheiros-dev-organization/members/ca064a9d-38b8-4f23-883d-ff5cdddd14a6
+Authorization: {{accessToken}}
